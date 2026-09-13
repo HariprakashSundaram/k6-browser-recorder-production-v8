@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "k6 Browser UI Recorder",
+  "version": "2.0.0",
+  "description": "Record browser UI interactions and generate k6/browser scripts with optional network-idle waits and transaction Trends.",
+  "permissions": ["storage", "activeTab", "scripting", "tabs", "webNavigation", "sidePanel"],
+  "host_permissions": ["<all_urls>"],
+  "background": {"service_worker": "background.js"},
+  "action": {"default_title": "k6 Recorder"},
+  "side_panel": {"default_path": "sidepanel.html"},
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>k6 Recorder</title>
+<style>
+body{font:13px Arial,sans-serif;margin:0;padding:16px;background:#f7f7f7;color:#222}
+h2{margin:0 0 12px}
+h3{margin:16px 0 8px}
+button{padding:8px 10px;margin:3px 0;border:0;border-radius:6px;cursor:pointer}
+input{box-sizing:border-box;width:100%;padding:8px;border:1px solid #bbb;border-radius:6px}
+#start{background:#111;color:#fff}
+#stop{background:#ddd}
+#clear{background:#ddd}
+#txnStart{background:#1769aa;color:#fff;width:100%}
+#txnEnd{background:#ddd;width:100%}
+#download{background:#1769aa;color:#fff;width:100%}
+#status{padding:8px 0;font-weight:bold}
+.count{color:#666}
+textarea{width:100%;height:330px;box-sizing:border-box;font:11px Consolas,monospace}
+.row{display:flex;gap:6px}
+.row button{flex:1}
+.option{padding:8px 0}
+label{display:flex;gap:8px;align-items:center}
+label input{width:auto}
+#txnStatus{margin:7px 0;padding:7px;background:#eee;border-radius:5px}
+</style>
+</head>
+<body>
+<h2>k6 Browser Recorder</h2>
+
+<div id="status">Stopped</div>
+
+<div class="row">
+  <button id="start">Start</button>
+  <button id="stop">Stop</button>
+  <button id="clear">Clear</button>
+</div>
+
+<div class="option">
+  <label>
+    <input type="checkbox" id="networkIdle">
+    Add network-idle wait
+  </label>
+  <div class="count">Optional. k6 supports networkidle, but it is discouraged for chatty applications.</div>
+</div>
+
+<div class="option">
+  <label>
+    <input type="checkbox" id="pageLoadedCheck" checked>
+    Add Page Body / Page Loaded validation (after goto)
+  </label>
+  <div class="count">Validates the target page only after goto. Hover actions are not recorded or generated.</div>
+</div>
+
+<h3>Transaction</h3>
+<input id="txnName" placeholder="Enter transaction name, e.g. Login">
+<button id="txnStart">Start Transaction</button>
+<button id="txnEnd">End Transaction</button>
+<div id="txnStatus">No active transaction</div>
+
+<p class="count" id="count">0 events</p>
+
+<button id="download">Download k6 script</button>
+
+<h3>Generated script</h3>
+<textarea id="output" spellcheck="false"></textarea>
+
+<script src="sidepanel.js"></script>
+</body>
+</html>
